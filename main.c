@@ -54,11 +54,7 @@ i--;
 }
 }
 
-printf("Buffer Text: %s\n", bufferText);
 argv[0] = bufferText;
-printf("argv[0]: %s\n", argv[0]);
-
-free(bufferText);
 
 if (execve(argv[0], argv, NULL) < 0)
 {
@@ -67,6 +63,8 @@ exit(1);
 }
 sleep(2);
 }
+
+free(bufferText);
 
 if (childProcessBatch > 1)
 {
