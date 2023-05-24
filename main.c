@@ -33,6 +33,7 @@ size_t bufferTextSize = 32;
 size_t i;
 size_t j;
 char newLine = '\n';
+char *argv[] = {NULL, NULL, NULL, NULL};
 
 printf("OurShell $ ");
 
@@ -53,7 +54,7 @@ i--;
 }
 }
 
-char *argv[] = {bufferText, NULL, NULL, NULL};
+argv[0] = bufferText;
 
 free(bufferText);
 
