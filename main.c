@@ -1,11 +1,18 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include <sys/types.h>
 #include "simpleshell.h"
 
+/**
+* main - main function: where everything starts
+* Return: integer
+*/
 int main()
 {
-    
+    pid_t childProcessBatch;
+    int counter = 7;
+    int childProcessStatus;
 
     while (counter > 5)
     {
@@ -30,7 +37,18 @@ int main()
             size_t i, j;
             char newLine = '\n';
 
-            
+            for (i = 0; i < getLineOutput; i++)
+            {
+                if (bufferText[i] == newLine)
+                {
+                    for (j = i; j < getLineOutput; j++)
+                    {
+                        bufferText[j] = bufferText[j + 1];
+                    }
+                    getLineOutput--;
+                    i--;
+                }
+            }
 
             char *argv[] = {bufferText, NULL, NULL, NULL};
 
@@ -50,5 +68,5 @@ int main()
         counter++;
     }
 
-    
+    return (0);
 }
