@@ -14,6 +14,7 @@ int main()
 pid_t childProcessBatch;
 int counter = 7;
 int childProcessStatus;
+extern char **environ;
 
 while (counter > 5)
 {
@@ -58,7 +59,7 @@ argv[0] = bufferText;
   
 free(bufferText);
 
-if (execve(argv[0], argv, NULL) < 0)
+if (execve(argv[0], argv, environ) < 0)
 {
 perror("");
 exit(1);
