@@ -30,16 +30,15 @@ if (childProcessBatch == 0)
 char *bufferText;
 size_t getLineOutput;
 size_t bufferTextSize = 32;
+size_t i;
+size_t j;
+char newLine = '\n';
 
 printf("OurShell $ ");
 
 bufferText = malloc(sizeof(char) * bufferTextSize);
 
 getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
-
-size_t i;
-size_t j;
-char newLine = '\n';
 
 for (i = 0; i < getLineOutput; i++)
 {
