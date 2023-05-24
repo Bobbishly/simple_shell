@@ -54,7 +54,9 @@ i--;
 }
 }
 
+printf("Buffer Text: %s\n", bufferText);
 argv[0] = bufferText;
+printf("argv[0]: %s\n", argv[0]);
 
 free(bufferText);
 
