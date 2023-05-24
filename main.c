@@ -30,6 +30,8 @@ int main()
             char *bufferText;
             size_t getLineOutput;
             size_t bufferTextSize = 32;
+            
+            printf("OurShell $ ");
 
             bufferText = malloc(sizeof(char) * bufferTextSize);
 
