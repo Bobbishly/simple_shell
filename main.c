@@ -37,7 +37,8 @@ bufferText = malloc(sizeof(char) * bufferTextSize);
 
 getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
 
-size_t i, j;
+size_t i;
+size_t j;
 char newLine = '\n';
 
 for (i = 0; i < getLineOutput; i++)
