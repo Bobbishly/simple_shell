@@ -11,65 +11,67 @@
 */
 int main()
 {
-    pid_t childProcessBatch;
-    int counter = 7;
-    int childProcessStatus;
+pid_t childProcessBatch;
+int counter = 7;
+int childProcessStatus;
 
-    while (counter > 5)
-    {
-        childProcessBatch = fork();
-        if (childProcessBatch < 0)
-        {
-            perror("");
-            exit(1);
-        }
+while (counter > 5)
+{
+childProcessBatch = fork();
+if (childProcessBatch < 0)
+{
+perror("");
+exit(1);
+}
 
-        if (childProcessBatch == 0)
-        {
+if (childProcessBatch == 0)
+{
 
-            char *bufferText;
-            size_t getLineOutput;
-            size_t bufferTextSize = 32;
-            
-            printf("OurShell $ ");
+char *bufferText;
+size_t getLineOutput;
+size_t bufferTextSize = 32;
 
-            bufferText = malloc(sizeof(char) * bufferTextSize);
+printf("OurShell $ ");
 
-            getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
+bufferText = malloc(sizeof(char) * bufferTextSize);
 
-            size_t i, j;
-            char newLine = '\n';
+getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
 
-            for (i = 0; i < getLineOutput; i++)
-            {
-                if (bufferText[i] == newLine)
-                {
-                    for (j = i; j < getLineOutput; j++)
-                    {
-                        bufferText[j] = bufferText[j + 1];
-                    }
-                    getLineOutput--;
-                    i--;
-                }
-            }
+size_t i, j;
+char newLine = '\n';
 
-            char *argv[] = {bufferText, NULL, NULL, NULL};
+for (i = 0; i < getLineOutput; i++)
+{
+if (bufferText[i] == newLine)
+{
+for (j = i; j < getLineOutput; j++)
+{
+bufferText[j] = bufferText[j + 1];
+}
+getLineOutput--;
+i--;
+}
+}
 
-            if (execve(argv[0], argv, NULL) < 0)
-            {
-                perror("");
-                exit(1);
-            }
-            sleep(2);
-        }
+char *argv[] = {bufferText, NULL, NULL, NULL};
 
-        if (childProcessBatch > 1)
-        {
-            wait(&childProcessStatus);
-        }
+free(bufferText);
 
-        counter++;
-    }
+if (execve(argv[0], argv, NULL) < 0)
+{
+perror("");
+exit(1);
+}
+sleep(2);
+}
 
-    return (0);
+if (childProcessBatch > 1)
+{
+wait(&childProcessStatus);
+}
+
+counter++;
+}
+
+return (0);
 }
