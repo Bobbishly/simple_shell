@@ -56,8 +56,6 @@ i--;
 }
 
 argv[0] = bufferText;
-  
-free(bufferText);
 
 if (execve(argv[0], argv, environ) < 0)
 {
