@@ -3,7 +3,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <stdio.h>
-#include "simpleshell.h"
+#include "main.h"
 
 /**
 * main - main function: where everything starts
