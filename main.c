@@ -16,13 +16,15 @@ int main()
 /*     char *argv[] = {NULL, NULL, NULL, NULL}; */
     int eachStrLength;
 
-    printf("OurShell $: ");
+    
     
     while (1)
     {
         char *strs[] = {NULL, NULL, NULL, NULL};
         int i;
         int strpos = 0;
+
+        printf("OurShell $: ");
 
         getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
         if(getLineOutput == -1)
