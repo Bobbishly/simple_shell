@@ -36,7 +36,7 @@ int main()
         eachStr = strtok(bufferText, "\n");
         while (eachStr != NULL)
         {
-            eachStrLength = strlength(eachStr);
+            /* eachStrLength = strlength(eachStr); */
             /* eachStr = removeSpaces(eachStr, eachStrLength); */
 
             strs[strpos] = eachStr;
