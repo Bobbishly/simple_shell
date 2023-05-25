@@ -14,7 +14,7 @@ int main()
     size_t bufferTextSize = 0;
     char *eachStr;
 /*     char *argv[] = {NULL, NULL, NULL, NULL}; */
-    int eachStrLength;
+    /* int eachStrLength; */
 
     
     
