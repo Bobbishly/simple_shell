@@ -12,7 +12,7 @@ int main()
     
     char *eachStr;
     char *argv[] = {NULL, NULL, NULL, NULL};
-    char *strs[] {NULL, NULL, NULL, NULL};
+    char *strs[] = {NULL, NULL, NULL, NULL};
     int strpos = 0;
     int eachStrLength;
     
