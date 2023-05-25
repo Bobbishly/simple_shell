@@ -15,9 +15,6 @@ int main()
     char *eachStr;
     int eachStrLength;
     
-    pid_t childProcess;
-    int childProcessStatus;
-    
     while (1)
     {
         char *strs[] = {NULL, NULL, NULL, NULL};
@@ -25,6 +22,8 @@ int main()
         int strpos;
         
         int processCount;
+        pid_t childProcess;
+        int childProcessStatus;
 
         printf("OurShell $: ");
 
