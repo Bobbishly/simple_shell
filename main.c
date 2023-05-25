@@ -24,10 +24,8 @@ if (childProcessBatch == 0)
 {
 
 char *bufferText;
-size_t getLineOutput;
+ssize_t getLineOutput;
 size_t bufferTextSize = 32;
-size_t i;
-size_t j;
 char *eachStr;
 char *argv[] = {NULL, NULL, NULL, NULL};
 
@@ -48,7 +46,7 @@ while (eachStr != NULL)
 
     int strLength = strlength(eachStr);
 
-    eachStr = removeSpaces(eachStr, i);
+    eachStr = removeSpaces(eachStr, strLength);
 
     argv[0] = eachStr;
 
