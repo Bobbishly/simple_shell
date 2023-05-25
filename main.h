@@ -8,7 +8,7 @@
 #include <string.h>
 #include <sys/wait.h>
 
-char *removeSpaces(char *str, int no)
+char *removeSpaces(char *str, int no);
 int strlength(char *str);
 
 #endif
