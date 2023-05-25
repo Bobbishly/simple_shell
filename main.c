@@ -11,10 +11,11 @@ int main()
     size_t bufferTextSize = 0;
     
     char *eachStr;
-    char *argv[] = {NULL, NULL, NULL, NULL};
+//     char *argv[] = {NULL, NULL, NULL, NULL};
     char *strs[] = {NULL, NULL, NULL, NULL};
     int strpos = 0;
     int eachStrLength;
+    int i;
     
     while (1)
     {
@@ -40,7 +41,7 @@ int main()
         }
     }
 
-    for (int i = 0; i <= strpos, i++)
+    for (i = 0; i <= strpos; i++)
     {
         printf("%s\n", strs[i]);
     }
