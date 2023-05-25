@@ -1,155 +1,77 @@
-#include "main.h"
-
-char *removeSpaces(char *str, int no);
-int strlength(char *str);
-
-/**
-* main - main function: where everything starts
-* Return: integer
-*/
-int main()
-{
-    char *bufferText;
-    ssize_t getLineOutput;
-    size_t bufferTextSize = 0;
-    char *eachStr;
-    int eachStrLength;
-
-    pid_t childProcess;
-    int childProcessStatus;
-    
-    while (1)
-    {
-
-        childProcess = fork();
-        if (childProcess < 1)
-        {
-            perror("");
-            exit(1);
-        }
-
-
-        if (childProcess == 0)
-        {
-        char *strs[] = {NULL, NULL, NULL, NULL};
-        int i;
-        int strpos;
-        
-        pid_t nestedChild;
-        int nestedChildStatus;
-
-        char *argv[] = {NULL, NULL, NULL, NULL};
-
-        printf("OurShell $: ");
-
-        getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
-        if(getLineOutput == -1)
-        {
-            free(bufferText);
-            return (-1);
-        }
-        strpos = 0;
-        eachStr = strtok(bufferText, "\n");
-        while (eachStr != NULL)
-        {
-             eachStrLength = strlength(eachStr);
-             eachStr = removeSpaces(eachStr, eachStrLength);
-
-            strs[strpos] = eachStr;
-            strpos++;
-
-            eachStr = strtok(NULL, "\n");
-        }
-
-        for (i = 0; i <= strpos; i++)
-        {
-            if (strs[i] == NULL)
-            {
-                break;
-            }
-            
-            nestedChild = fork();
-            if (nestedChild < 0)
-            {
-                perror("");
-                exit(1);
-            }
-            if (nestedChild == 0)
-            {
-                argv[0] = strs[i];
-                if (execve(argv[0], argv, NULL) < 0)
-                {
-                    perror("");
-                    exit(1);
-                }
-                sleep(2);
-            }
-            if (nestedChild > 1)
-            {
-                wait(&nestedChildStatus);
-            }
-        }
-        }
-
-
-        if (childProcess > 1)
-        {
-            wait(&childProcessStatus);
-        }
-    }
-
-
-    return (0);
-}
-
-
-/**
-* strlength - get a string's length
-* @str: the string
-* Return: length of string in integer
-*/
-int strlength(char *str)
-{
-  int len = 0;
-  
-  while (str[len])
-  {
-    len++;
-  }
-  
-  return (len);
-}
-
-/**
-* removeSpaces - function to remove spaces in a string
-* @str: the string
-* @no: length of string
-* Return: formatted string
-*/
-char *removeSpaces(char *str, int no)
-{
-  int isSpace = 0;
-  int isSpace2 = 0;
-  
-  int aCount = 0;
-  
-  while (aCount < no)
-  {
-    for (isSpace = 0; isSpace < no; isSpace++)
-    {
-      if (str[isSpace] == ' ')
-      {
-        isSpace2 = isSpace;
-        
-        while (str[isSpace2])
-        {
-          str[isSpace2] = str[isSpace2 + 1];
-          isSpace2++;
-        }
-      }
-    }
-    aCount++;
-  }
-  return str;
-}
-
+#include <unistd.h> 
+#include <stdlib.h> 
+#include <sys/wait.h> 
+#include <sys/types.h> 
+#include <stdio.h> 
+#include "main.h" 
+  
+ /** 
+ * main - main function: where everything starts 
+ * Return: integer 
+ */ 
+ int main() 
+ { 
+ pid_t childProcessBatch; 
+ int counter = 7; 
+ int childProcessStatus; 
+ extern char **environ; 
+  
+ while (counter > 5) 
+ { 
+ childProcessBatch = fork(); 
+ if (childProcessBatch < 0) 
+ { 
+ perror(""); 
+ exit(1); 
+ } 
+  
+ if (childProcessBatch == 0) 
+ { 
+  
+ char *bufferText; 
+ size_t getLineOutput; 
+ size_t bufferTextSize = 32; 
+ size_t i; 
+ size_t j; 
+ char newLine = '\n'; 
+ char *argv[] = {NULL, NULL, NULL, NULL}; 
+  
+ printf("OurShell $ "); 
+  
+ bufferText = malloc(sizeof(char) * bufferTextSize); 
+  
+ getLineOutput = getline(&bufferText, &bufferTextSize, stdin); 
+  
+ for (i = 0; i < getLineOutput; i++) 
+ { 
+ if (bufferText[i] == newLine) 
+ { 
+ for (j = i; j < getLineOutput; j++) 
+ { 
+ bufferText[j] = bufferText[j + 1]; 
+ } 
+ getLineOutput--; 
+ i--; 
+ } 
+ } 
+  
+ argv[0] = bufferText; 
+  
+ if (execve(argv[0], argv, environ) < 0) 
+ { 
+ perror(""); 
+ exit(1); 
+ } 
+ sleep(2); 
+ } 
+  
+ if (childProcessBatch > 1) 
+ { 
+ wait(&childProcessStatus); 
+ } 
+  
+ counter++; 
+ } 
+  
+ return (0); 
+ }
