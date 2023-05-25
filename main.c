@@ -57,7 +57,7 @@ int main()
         }
         
         
-        while (processCount < strpos)
+        while (processCount <= strpos)
         {
             childProcess = fork();
             if (childProcess < 0)
