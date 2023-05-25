@@ -35,7 +35,6 @@ int main()
         int i;
         int strpos;
         
-        int processCount;
         pid_t nestedChild;
         int nestedChildStatus;
 
@@ -73,7 +72,7 @@ int main()
             if (nestedChild < 0)
             {
                 perror("");
-                exit(1)
+                exit(1);
             }
             if (nestedChild == 0)
             {
