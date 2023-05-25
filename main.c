@@ -1,8 +1,3 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <stdio.h>
 #include "main.h"
 
 /**
@@ -51,15 +46,7 @@ eachStr = strtok(bufferText, "\n");
 while (eachStr != NULL)
 {
 
-    // before next string
-    // remove spaces from this string
-    // run execve program
-
-    int i = 0;
-    while (eachStr[i])
-    {
-        i++;
-    }
+    int strLength = strlength(eachStr);
 
     eachStr = removeSpaces(eachStr, i);
 
@@ -72,7 +59,7 @@ while (eachStr != NULL)
     }
     sleep(2);
 
-    eachStr = strtok(NULL, "\n")
+    eachStr = strtok(NULL, "\n");
 }
 
 
