@@ -13,6 +13,8 @@ pid_t childProcessBatch;
 int counter = 7;
 int childProcessStatus;
 extern char **environ;
+pid_t nestedChild;
+int nestedChildStatus;
 
 while (counter > 5)
 {
@@ -31,6 +33,9 @@ ssize_t getLineOutput;
 size_t bufferTextSize = 32;
 char *eachStr;
 char *argv[] = {NULL, NULL, NULL, NULL};
+char *strs[] = {NULL, NULL, NULL, NULL, NULL, NULL};
+int strpos = 0;
+int execounter = 0;
 
 while (1)
 {
@@ -51,18 +56,44 @@ while (eachStr != NULL)
 
     eachStr = removeSpaces(eachStr, strLength);
 
-    argv[0] = eachStr;
-
-    if (execve(argv[0], argv, environ) < 0)
-    {
-    perror("");
-    exit(1);
-    }
-    sleep(2);
+    strs[0] = eachStr;
+    strpos++;
 
     eachStr = strtok(NULL, "\n");
 }
 
+}
+
+for (execounter = 0; execounter < strpos; execounter++)
+{
+    if (strs[execounter] == NULL)
+    {
+        break;
+    }
+
+    nestedChild = fork();
+    if (nestedChild < 0)
+    {
+    perror("");
+    exit(1);
+    }
+
+    if (nestedChild == 0)
+    {
+        argv[0] = eachStr;
+
+        if (execve(argv[0], argv, environ) < 0)
+        {
+        perror("");
+        exit(1);
+        }
+        sleep(2);
+    }
+
+    if (nestedChild > 1)
+    {
+    wait(&nestedChildStatus);
+    }
 
 }
 
