@@ -13,14 +13,18 @@ int main()
     ssize_t getLineOutput;
     size_t bufferTextSize = 0;
     char *eachStr;
-/*     char *argv[] = {NULL, NULL, NULL, NULL}; */
     int eachStrLength;
+    
+    pid_t childProcess;
+    int childProcessStatus;
     
     while (1)
     {
         char *strs[] = {NULL, NULL, NULL, NULL};
         int i;
         int strpos;
+        
+        int processCount;
 
         printf("OurShell $: ");
 
@@ -51,7 +55,37 @@ int main()
             }
             printf("%s\n", strs[i]);
         }
-
+        
+        
+        while (processCount < strpos)
+        {
+            childProcess = fork();
+            if (childProcess < 0)
+            {
+                perror("");
+                exit(1);
+            }
+            
+            if (childProcess == 0)
+            {
+                char *argv[] = {NULL, NULL, NULL, NULL};
+                argv[0] = strs[processCount];
+                
+                if (execve(argv[0], argv, NULL) < 0)
+                {
+                    perror("");
+                    exit(1);
+                }
+                sleep(2);
+            }
+            
+            if (childProcess > 1)
+            {
+                wait(&childProcessStatus);
+            }
+            
+            processCount++;
+        }
     }
 
 
