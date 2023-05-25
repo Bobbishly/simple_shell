@@ -33,36 +33,43 @@ size_t getLineOutput;
 size_t bufferTextSize = 32;
 size_t i;
 size_t j;
-char newLine = '\n';
+char *eachStr;
 char *argv[] = {NULL, NULL, NULL, NULL};
 
+while (1)
+{
 printf("OurShell $ ");
 
-bufferText = malloc(sizeof(char) * bufferTextSize);
-
 getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
-
-for (i = 0; i < getLineOutput; i++)
+if (getLineOutput == -1)
 {
-if (bufferText[i] == newLine)
-{
-for (j = i; j < getLineOutput; j++)
-{
-bufferText[j] = bufferText[j + 1];
-}
-getLineOutput--;
-i--;
-}
+    free(bufferText);
+    return (-1);
 }
 
-argv[0] = bufferText;
-
-if (execve(argv[0], argv, environ) < 0)
+eachStr = strtok(bufferText, "\n");
+while (eachStr != NULL)
 {
-perror("");
-exit(1);
+
+    // before next string
+    // remove spaces from this string
+    // run execve program
+
+    argv[0] = eachStr;
+
+    if (execve(argv[0], argv, environ) < 0)
+    {
+    perror("");
+    exit(1);
+    }
+    sleep(2);
+
+    eachStr = strtok(NULL, "\n")
 }
-sleep(2);
+
+
+}
+
 }
 
 if (childProcessBatch > 1)
