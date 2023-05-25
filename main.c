@@ -55,6 +55,14 @@ while (eachStr != NULL)
     // remove spaces from this string
     // run execve program
 
+    int i = 0;
+    while (eachStr[i])
+    {
+        i++;
+    }
+
+    eachStr = removeSpaces(eachStr, i);
+
     argv[0] = eachStr;
 
     if (execve(argv[0], argv, environ) < 0)

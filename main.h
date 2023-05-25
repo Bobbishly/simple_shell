@@ -3,4 +3,6 @@
 
 #include <stdio.h>
 
+char *removeSpaces(char *str, int no)
+
 #endif
