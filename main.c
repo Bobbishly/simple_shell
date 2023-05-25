@@ -45,7 +45,7 @@ int main()
 
         for (i = 0; i <= strpos; i++)
         {
-            if (str[i] == NULL)
+            if (strs[i] == NULL)
             {
                 break;
             }
