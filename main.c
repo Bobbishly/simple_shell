@@ -14,16 +14,32 @@ int main()
     size_t bufferTextSize = 0;
     char *eachStr;
     int eachStrLength;
+
+    pid_t childProcess;
+    int childProcessStatus;
     
     while (1)
     {
+
+        childProcess = fork();
+        if (childProcess < 1)
+        {
+            perror("");
+            exit(1);
+        }
+
+
+        if (childProcess == 0)
+        {
         char *strs[] = {NULL, NULL, NULL, NULL};
         int i;
         int strpos;
         
         int processCount;
-        pid_t childProcess;
-        int childProcessStatus;
+        pid_t nestedChild;
+        int nestedChildStatus;
+
+        char *argv[] = {NULL, NULL, NULL, NULL};
 
         printf("OurShell $: ");
 
@@ -52,24 +68,16 @@ int main()
             {
                 break;
             }
-            printf("%s\n", strs[i]);
-        }
-        
-        
-        while (processCount <= strpos)
-        {
-            childProcess = fork();
-            if (childProcess < 0)
+            
+            nestedChild = fork();
+            if (nestedChild < 0)
             {
                 perror("");
-                exit(1);
+                exit(1)
             }
-            
-            if (childProcess == 0)
+            if (nestedChild == 0)
             {
-                char *argv[] = {NULL, NULL, NULL, NULL};
-                argv[0] = strs[processCount];
-                
+                argv[0] = strs[i];
                 if (execve(argv[0], argv, NULL) < 0)
                 {
                     perror("");
@@ -77,13 +85,17 @@ int main()
                 }
                 sleep(2);
             }
-            
-            if (childProcess > 1)
+            if (nestedChild > 1)
             {
-                wait(&childProcessStatus);
+                wait(&nestedChildStatus);
             }
-            
-            processCount++;
+        }
+        }
+
+
+        if (childProcess > 1)
+        {
+            wait(&childProcessStatus);
         }
     }
 
