@@ -22,7 +22,7 @@ int main()
     {
         char *strs[] = {NULL, NULL, NULL, NULL};
         int i;
-        int strpos = 0;
+        int strpos;
 
         printf("OurShell $: ");
 
@@ -32,7 +32,7 @@ int main()
             free(bufferText);
             return (-1);
         }
-
+        strpos = 0;
         eachStr = strtok(bufferText, "\n");
         while (eachStr != NULL)
         {
