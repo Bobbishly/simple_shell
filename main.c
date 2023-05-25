@@ -1,5 +1,8 @@
 #include "main.h"
 
+char *removeSpaces(char *str, int no);
+int strlength(char *str);
+
 /**
 * main - main function: where everything starts
 * Return: integer
