@@ -102,7 +102,7 @@ char *removeSpaces(char *str, int no)
         while (str[isSpace2])
         {
           str[isSpace2] = str[isSpace2 + 1];
-          isSpace++;
+          isSpace2++;
         }
       }
     }
