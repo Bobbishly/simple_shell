@@ -37,7 +37,7 @@ int main()
         while (eachStr != NULL)
         {
             eachStrLength = strlength(eachStr);
-            eachStr = removeSpaces(eachStr, eachStrLength);
+            /* eachStr = removeSpaces(eachStr, eachStrLength); */
 
             strs[strpos] = eachStr;
             strpos++;
