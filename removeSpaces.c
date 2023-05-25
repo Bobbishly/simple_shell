@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+* removeSpaces - function to remove spaces in a string
+* @str: the string
+* @no: length of string
+* Return: formatted string
+*/
 char *removeSpaces(char *str, int no)
 {
   int isSpace = 0;
