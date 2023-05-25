@@ -14,7 +14,7 @@ int main()
     size_t bufferTextSize = 0;
     char *eachStr;
 /*     char *argv[] = {NULL, NULL, NULL, NULL}; */
-    /* int eachStrLength; */
+    int eachStrLength;
 
     
     
@@ -36,8 +36,8 @@ int main()
         eachStr = strtok(bufferText, "\n");
         while (eachStr != NULL)
         {
-            /* eachStrLength = strlength(eachStr); */
-            /* eachStr = removeSpaces(eachStr, eachStrLength); */
+             eachStrLength = strlength(eachStr);
+             eachStr = removeSpaces(eachStr, eachStrLength);
 
             strs[strpos] = eachStr;
             strpos++;
