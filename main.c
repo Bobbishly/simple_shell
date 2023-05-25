@@ -12,16 +12,16 @@ int main()
     char *bufferText;
     ssize_t getLineOutput;
     size_t bufferTextSize = 0;
-    
     char *eachStr;
 /*     char *argv[] = {NULL, NULL, NULL, NULL}; */
-    char *strs[] = {NULL, NULL, NULL, NULL};
-    int strpos = 0;
     int eachStrLength;
-    int i;
     
     while (1)
     {
+        char *strs[] = {NULL, NULL, NULL, NULL};
+        int i;
+        int strpos = 0;
+
         printf("OurShell $: ");
 
         getLineOutput = getline(&bufferText, &bufferTextSize, stdin);
