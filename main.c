@@ -15,8 +15,6 @@ int main()
     char *eachStr;
 /*     char *argv[] = {NULL, NULL, NULL, NULL}; */
     int eachStrLength;
-
-    
     
     while (1)
     {
