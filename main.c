@@ -42,11 +42,12 @@ int main()
 
             eachStr = strtok(NULL, "\n");
         }
-    }
 
-    for (i = 0; i <= strpos; i++)
-    {
-        printf("%s\n", strs[i]);
+        for (i = 0; i <= strpos; i++)
+        {
+            printf("%s\n", strs[i]);
+        }
+        
     }
 
 
